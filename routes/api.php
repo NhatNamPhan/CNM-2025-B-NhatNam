@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 
+use function Symfony\Component\String\b;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,5 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/tasks', [TaskController::class, 'store']);
-Route::get('/tasks', [TaskController::class, 'index']);
+Route::group(['prefix' => 'tasks'], function () {
+    Route::post('', [TaskController::class, 'store']);
+    Route::get('', [TaskController::class, 'index']);
+});
