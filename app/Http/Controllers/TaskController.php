@@ -21,4 +21,11 @@ class TaskController extends Controller
 
         return new TaskResource($task);
     }
+
+    public function index(Request $request)
+    {
+        $tasks = Task::orderByDesc('id');
+
+        return TaskResource::apiPaginate($tasks, $request);
+    }
 }
